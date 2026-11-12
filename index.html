@@ -1,0 +1,58 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ES6 and Promise Demo</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <div class="container">
+        <h1>ES6 and Promise Demo</h1>
+        <p>Student: Sukhmeet Kaur</p>
+
+        <p>Click the button to start an asynchronous operation.</p>
+
+        <button id="startBtn">Start Operation</button>
+
+        <h3 id="result">Waiting to start...</h3>
+    </div>
+
+    <script>
+        const button = document.getElementById("startBtn");
+        const result = document.getElementById("result");
+
+        const performOperation = () => {
+            result.textContent = "Operation is in progress...";
+
+            const operation = new Promise((resolve, reject) => {
+                setTimeout(() => {
+                    const success = true;
+
+                    if (success) {
+                        resolve("Operation completed successfully!");
+                    } else {
+                        reject("Operation failed!");
+                    }
+                }, 2000);
+            });
+
+            operation
+                .then(message => {
+                    result.textContent = message;
+                })
+                .catch(error => {
+                    result.textContent = error;
+                })
+                .finally(() => {
+                    console.log("Operation finished.");
+                });
+        };
+
+        button.addEventListener("click", performOperation);
+    </script>
+
+</body>
+</html>
